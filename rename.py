@@ -46,4 +46,18 @@ def main():
 
                 new_file_path = os.path.join(tmp_dir, new_file)
                 shutil.copy(file_path, new_file_path)
-                print(f"Prepared to copy: {file_path} ->​⬤
+                print(f"Prepared to copy: {file_path} -> {new_file_path}")
+                counter += 1
+
+            for filename in os.listdir(tmp_dir):
+                shutil.move(os.path.join(tmp_dir, filename), target_directory)
+            print("All files successfully copied and renamed.")
+        else:
+            print("No files found in the source directory.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        shutil.rmtree(tmp_dir)
+
+if __name__ == "__main__":
+    main()
