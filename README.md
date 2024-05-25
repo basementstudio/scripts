@@ -1,7 +1,7 @@
-## rename.sh
+## rename.py
 Clone rename the files from a source directory to a destination directory setting a rename pattern. Usefull for large image sequences. Of course, it starts from zero.
 
-```rename.sh [-z zero_padding_width] src_path dest_path/output_pattern```
+```python3 rename.py [-z zero_padding_width] src_path dest_path/output_pattern```
 
 ## compress.py
 This compress input images to `webp`. It outputs a summary at the end
