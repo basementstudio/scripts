@@ -40,6 +40,19 @@ fi
 # Extract the target pattern without the path
 target_pattern=$(basename "$target_pattern_with_path")
 
+# Create a temporary directory to store the renamed files
+tmp_dir=$(mktemp -d)
+
+# Function to clean up temporary directory on failure
+cleanup() {
+    rm -rf "$tmp_dir"
+    echo "Operation canceled. Temporary files removed."
+    exit 1
+}
+
+# Trap any errors and clean up
+trap 'cleanup' ERR
+
 # Check if there are any files in the source directory
 if [ "$(ls -A "$src_path")" ]; then
     counter=1
@@ -58,11 +71,17 @@ if [ "$(ls -A "$src_path")" ]; then
         if [[ $new_file != *".${extension}" ]]; then
             new_file="${new_file}.${extension}"
         fi
-        # Move the file to the target directory with the new name
-        mv "$file" "${target_directory}/${new_file}"
-        echo "Renamed and moved: $file -> ${target_directory}/${new_file}"
+        # Copy the file to the temporary directory with the new name
+        cp "$file" "${tmp_dir}/${new_file}"
+        echo "Prepared to copy: $file -> ${tmp_dir}/${new_file}"
         counter=$((counter + 1))
     done
+
+    # Move all files from the temporary directory to the target directory
+    mv "$tmp_dir"/* "$target_directory"
+    echo "All files successfully copied and renamed."
+    # Clean up temporary directory
+    rmdir "$tmp_dir"
 else
     echo "No files found in the source directory."
 fi
