@@ -7,3 +7,5 @@ Clone rename the files from a source directory to a destination directory settin
 This compress input images to `webp`.
 
 ```python3 compress.py /path/to/your/input/directory /path/to/your/output/directory --quality 80```
+
+<img width="469" alt="image" src="https://github.com/basementstudio/scripts/assets/43894343/b01eecee-38cc-4d5f-b18c-375bede7b619">
