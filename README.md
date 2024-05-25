@@ -11,6 +11,6 @@ This compress input images to `webp`. It outputs a summary at the end
 <img width="469" alt="image" src="https://github.com/basementstudio/scripts/assets/43894343/b01eecee-38cc-4d5f-b18c-375bede7b619">
 
 ## resize.py
-This resizes input images to a target output.
+This resizes input images to a target output. You can either use `--width & --height` or `--scale`.
 
-```python3 resize.py src_path dest_path --width 1920 --height 1080```
+```python3 resize.py src_path dest_path --scale 0.5```
