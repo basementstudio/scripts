@@ -12,6 +12,9 @@ def compress_images_to_webp(input_dir, output_dir, quality=80):
         quality (int): Quality setting for the compressed images (0-100).
     """
     supported_formats = ['jpg', 'jpeg', 'png', 'bmp', 'tiff', 'webp']
+    total_images = 0
+    total_size_before = 0
+    total_size_after = 0
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -21,9 +24,23 @@ def compress_images_to_webp(input_dir, output_dir, quality=80):
             input_path = os.path.join(input_dir, filename)
             output_path = os.path.join(output_dir, os.path.splitext(filename)[0] + '.webp')
             
+            size_before = os.path.getsize(input_path)
+            total_size_before += size_before
+            
             with Image.open(input_path) as img:
                 img.save(output_path, 'webp', quality=quality)
-                print(f"Compressed {filename} and saved as {output_path}")
+            
+            size_after = os.path.getsize(output_path)
+            total_size_after += size_after
+            total_images += 1
+            
+            print(f"Compressed {filename} and saved as {output_path}")
+
+    print("\nSummary:")
+    print(f"Total images processed: {total_images}")
+    print(f"Total size before compression: {total_size_before / 1024:.2f} KB")
+    print(f"Total size after compression: {total_size_after / 1024:.2f} KB")
+    print(f"Total size reduction: {(total_size_before - total_size_after) / 1024:.2f} KB ({((total_size_before - total_size_after) / total_size_before) * 100:.2f}%)")
 
 def main():
     parser = argparse.ArgumentParser(description="Compress images to WebP format")
