@@ -55,7 +55,7 @@ trap 'cleanup' ERR
 
 # Check if there are any files in the source directory
 if [ "$(ls -A "$src_path")" ]; then
-    counter=1
+    counter=0
     for file in "$src_path"/*; do
         # Skip if it is a directory
         if [ -d "$file" ]; then
