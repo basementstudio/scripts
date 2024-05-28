@@ -1,6 +1,5 @@
-## Setup
+## Setup (add to `package.json` scripts)
 ```json
-/* package.json (scripts) */
 "compress": "curl -s https://raw.githubusercontent.com/basementstudio/scripts/main/compress.py | python3 -",
 "rename": "curl -s https://raw.githubusercontent.com/basementstudio/scripts/main/rename.py | python3 -",
 "resize": "curl -s https://raw.githubusercontent.com/basementstudio/scripts/main/resize.py | python3 -"
